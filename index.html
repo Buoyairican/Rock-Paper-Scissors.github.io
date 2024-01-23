@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Rock Paper Scissors</title>
+		<meta charset="utf-8">
+		<style type="text/css">
+
+	body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+   
+}
+
+.centered {
+    width: 50%; 
+    padding: 20px;
+}
+
+.resize {
+    max-width: 100px; 
+    max-height: 100px;
+    height: auto;
+    width: auto;
+}
+
+.image-container-1 {
+	padding-top: 10px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.image-container-1 img {
+    margin: 5px; 
+}
+
+.image-container-2 {
+
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.image-container-2 img {
+	max-width: 300px; 
+    max-height: 300px;
+    margin: 50px; 
+}
+.image-container-3 {
+
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.image-container-3 img {
+	max-width: 100px; 
+    max-height: 100px;
+    margin: 50px; 
+}
+
+
+		</style>
+	</head>
+	<body>
+		<div id="container" class="container">
+        <div class="centered">
+
+		<div class="image-container-1">
+				<img src="0.png" alt="loading" id="contestant1-2" class="resize">
+				<img src="0.png" alt="loading" id="contestant1-1" class="resize">
+				<img src="charta.png" alt="loading" class="resize">
+				<img src="0.png" alt="loading" id="contestant2-2" class="resize">
+				<img src="0.png" alt="loading" id="contestant2-1" class="resize">
+		</div>		
+
+		<div id="playing" class="image-container-2" >
+
+				<img src="paper left.png" alt="loading" id="contestant-left" class="resize">
+				<img src="paper right.png" alt="loading" id="contestant-right" class="resize">
+
+		</div>
+
+		<div id="chosing" class="image-container-3" style="visibility: hidden;" >
+
+			<a href="javascript:void(0);" onclick="paper()"><img src="paper right.png" alt="loading" id="left" class="resize"></a>
+			<a href="javascript:void(0);" onclick="rock()"><img src="rock right.png" alt="loading" id="left" class="resize"></a>
+			<a href="javascript:void(0);" onclick="scissors()"><img src="scissors right.png" alt="loading" id="left" class="resize"></a>
+		
+		</div>	
+
+		<div class="image-container-3" >
+
+				<a href="javascript:void(0);" onclick="play()"><img src="play.png" alt="loading" id="play-button" class="resize"></a>
+
+		</div>
+
+
+
+
+		</div>
+		</div>
+
+		<script type="text/javascript">
+
+			var contestant2=["paper","rock","scissors"];
+			var numbers=["0.png","1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png"];
+			var chossing_contestant1="";
+			var chossing_contestant2="";
+			var points_contestant1=0;
+			var points_contestant2=0;
+			var j1=0;
+			var j2=0;
+
+
+			function play() {
+				document.getElementById("play-button").style.visibility = 'hidden';
+				document.getElementById("chosing").style.visibility = 'visible';
+
+			}
+
+			function display() {
+				document.getElementById("play-button").style.visibility = 'visible';
+				document.getElementById("chosing").style.visibility = 'hidden';
+			}
+
+			function paper() {
+				document.getElementById("contestant-right").src="paper right.png";
+				var i= Math.floor(Math.random() * 3);
+				document.getElementById("contestant-left").src=contestant2[i]+" left.png";
+				chossing_contestant1=contestant2[i];
+				chossing_contestant2="paper";
+				calculation();
+				display();
+
+			}
+
+			function rock() {
+				document.getElementById("contestant-right").src="rock right.png";
+				var i= Math.floor(Math.random() * 3);
+				document.getElementById("contestant-left").src=contestant2[i]+" left.png";
+				chossing_contestant1=contestant2[i];
+				chossing_contestant2="rock";
+				calculation();
+				display();
+
+			}
+
+			function scissors() {
+				document.getElementById("contestant-right").src="scissors right.png";
+				var i= Math.floor(Math.random() * 3);
+				document.getElementById("contestant-left").src=contestant2[i]+" left.png";
+				chossing_contestant1=contestant2[i];
+				chossing_contestant2="scissors";
+				calculation();
+				display();
+
+			}
+			
+			function calculation() {
+				if( chossing_contestant1=="paper" && chossing_contestant2=="rock")
+					points_contestant1++;
+				else if( chossing_contestant1=="paper" && chossing_contestant2=="scissors")
+					points_contestant2++;
+				else if( chossing_contestant1=="rock" && chossing_contestant2=="scissors")
+					points_contestant1++;
+				else if( chossing_contestant1=="rock" && chossing_contestant2=="paper")
+					points_contestant2++;
+				else if( chossing_contestant1=="scissors" && chossing_contestant2=="paper")
+					points_contestant1++;
+				else if( chossing_contestant1=="scissors" && chossing_contestant2=="rock")
+					points_contestant2++;
+				if(points_contestant1==10){
+					points_contestant1=0;
+					j1++;
+				}
+				if(points_contestant2==10){
+					points_contestant2=0;
+					j2++;
+				}
+				document.getElementById("contestant1-1").src=numbers[points_contestant1];
+				document.getElementById("contestant2-1").src=numbers[points_contestant2];
+				document.getElementById("contestant1-2").src=numbers[j1];
+				document.getElementById("contestant2-2").src=numbers[j2];
+			}
+
+			
+
+		</script>
+
+	</body>
+</html>
